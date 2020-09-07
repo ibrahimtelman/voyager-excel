@@ -6,7 +6,6 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 use TCG\Voyager\Facades\Voyager;
-use VoyagerExcel\Http\Middleware\VoyagerExcelMiddleware;
 
 class VoyagerExcelServiceProvider extends ServiceProvider
 {
@@ -18,6 +17,6 @@ class VoyagerExcelServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/lang'), 'voyager_excel');
 
-        Voyager::addAction(\VoyagerExcel\Actions\Export::class);
+        Voyager::addAction(\VoyagerExcelExport\Actions\Export::class);
     }
 }
