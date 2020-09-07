@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-namespace VoyagerExcel;
+namespace VoyagerExcelExport;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
@@ -12,12 +12,11 @@ class VoyagerExcelServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        
     }
 
     public function boot(Router $router, Dispatcher $event)
     {
-        $this->loadTranslationsFrom(realpath(__DIR__.'/../resources/lang'), 'voyager_excel');
+        $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/lang'), 'voyager_excel');
 
         Voyager::addAction(\VoyagerExcel\Actions\Export::class);
     }

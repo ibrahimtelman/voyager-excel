@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-namespace VoyagerExcel\Exports;
+namespace VoyagerExcelExport\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use TCG\Voyager\Facades\Voyager;
@@ -18,24 +18,27 @@ class BaseExport implements FromCollection
     }
     public function collection()
     {
-        $fields = $this->dataType->browseRows->map(function($res){
-            return $res['field'];
-        });
+        $exportable = ($this->model->exportable);
 
-        $table = $this->dataType->browseRows->map(function($res){
-            return $res['display_name'];
-        });
+        $fields = $exportable["fields"];
+        $table = $exportable["table"];
 
-        $rs =  $this->model->whereIn($this->model->getKeyName(), $this->ids)->get();
-        $rs = $rs->map(function($res)use($fields){
+        if (!empty(array_filter($this->ids))) {
+            $rs =  $this->model->whereIn($this->model->getKeyName(), $this->ids)->get();
+        } else {
+            $rs =  $this->model->all();
+        }
+
+        $rs = $rs->map(function ($res) use ($fields) {
             $arr = [];
-            foreach($fields as $val){
-                $arr[$val] = $res[$val];
+            foreach ($fields as $key => $val) {
+
+                $arr[$key] = $val($res[$key]);
             }
             return $arr;
         });
 
-        $table = collect([$table->toArray()])->merge($rs);
+        $table = collect([$table])->merge($rs);
 
         return $table;
     }

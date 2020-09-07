@@ -1,10 +1,10 @@
 <?php
 
-namespace VoyagerExcel\Actions;
+namespace VoyagerExcelExport\Actions;
 
 use TCG\Voyager\Actions\AbstractAction;
 use Maatwebsite\Excel\Facades\Excel;
-use VoyagerExcel\Exports\BaseExport;
+use VoyagerExcelExport\Exports\BaseExport;
 use Illuminate\Database\Eloquent\Model;
 
 class Export extends AbstractAction
@@ -21,19 +21,23 @@ class Export extends AbstractAction
 
     public function shouldActionDisplayOnDataType()
     {
-        if(empty($this->dataType->model_name)){
+        if (empty($this->dataType->model_name)) {
             return false;
         }
 
-        if(!class_exists($this->dataType->model_name)){
+        if (!class_exists($this->dataType->model_name)) {
             return false;
         }
 
         $model = new $this->dataType->model_name;
-        if(!($model instanceof  Model)){
+        if (!($model instanceof  Model)) {
             return false;
         }
-        
+
+        if (!isset($model->exportable)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -51,11 +55,9 @@ class Export extends AbstractAction
 
     public function massAction($ids, $comingFrom)
     {
-        if(empty(array_filter($ids))){
-            return redirect($comingFrom);
-        }
+
         return Excel::download(
-            new BaseExport($this->dataType, $ids),  
+            new BaseExport($this->dataType, $ids),
             $this->getFileName()
         );
     }
