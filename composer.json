@@ -1,5 +1,5 @@
 {
-  "name": "voyager-excel-export",
+  "name": "ibrahimtelman/voyager-excel-export",
   "description": "voyager excel export hook based voyager-excel package",
   "type": "library",
   "license": "MIT",
