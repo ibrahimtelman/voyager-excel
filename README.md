@@ -5,13 +5,13 @@ a plugin for excel export
 ## Install hook
 
 ```bash
-php artisan hook:install voyager-excel
+php artisan hook:install voyager-excel-export
 ```
 
 ## Enable hook
 
 ```bash
-php artisan hook:enable voyager-excel
+php artisan hook:enable voyager-excel-export
 ```
 
 ## Usage
