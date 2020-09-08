@@ -3,7 +3,7 @@
   "description": "voyager excel export hook based voyager-excel package",
   "type": "library",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     {
       "name": "ibrahimtelman",
