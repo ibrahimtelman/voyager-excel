@@ -1,6 +1,6 @@
 # Voyager Excel Export
 
-a plugin for excel export 
+a plugin for excel export
 
 ## Install hook
 
@@ -31,14 +31,14 @@ public function setExportable()
   //list column of table which you want to export
   //type 1 ["key1", "key2"]
   //type 2 ["key1" => "New Name", "key2" => "New Name"]
-  //or with closure ["key1" => [ "name" => "New Name", "value" => function($value){ return $value } ]]
+  //or with closure ["key1" => [ "name" => "New Name", "value" => function($value, $model){ return $value } ]]
   //you all free to combine three options
-  
+
   //example
   return array(
     "id", "fullname" => [
           "name" => "Name",
-          "value" => function ($value) {
+          "value" => function ($value, $model) {
               return strtoupper($value);
           }
       ], "email" => "Email", "phone" => "Phone"
@@ -49,8 +49,8 @@ public function setExportable()
 ## Support Language
 
 - tr
+- en
 - zh_CN （中文）
-- en 
 
 ## License
 
@@ -58,6 +58,4 @@ MIT
 
 ## Links
 
-- [Voyager中文文档](http://doc.laravel-voyager.cn/)
-- [国内插件源](http://satisfy.xiaoqiezi.top)
-- [国内插件源使用方法](http://doc.laravel-voyager.cn/getting-started/installation.html#%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E8%AF%AD%E8%A8%80%E5%8C%85)
+- [Voyager](https://voyager-docs.devdojo.com/)

@@ -33,7 +33,7 @@ class BaseExport implements FromCollection
             $arr = [];
             foreach ($fields as $key => $val) {
 
-                $arr[$key] = $val($res[$key]);
+                $arr[$key] = $val($res[$key], $res);
             }
             return $arr;
         });
